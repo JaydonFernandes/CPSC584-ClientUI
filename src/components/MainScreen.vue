@@ -1,12 +1,25 @@
 <template>
-  <div>
-    Main Screen
+  <div class="main-div">
+    <topBar/>
+    <h3>Main Screen</h3>
+    <p>Press "N" to bring up robot info</p>
+    <p>All other key commads will print in the console for now...</p>
+    
+    <statusModal ref="my-modal"/>
+    
   </div>
 </template>
 
 <script>
+
+import statusModal from "./statusModal"
+import topBar from "./topBar"
 export default {
   name: 'MainScreen',
+  components: {
+    statusModal,
+    topBar
+  },
   data() {
     return {
       mapVisible: false,
@@ -29,6 +42,7 @@ export default {
         case 'N':
           this.statusVisible = !this.statusVisible
           console.log("Toggling statuses...")
+          this.$refs['my-modal'].$refs["mystatus"].toggle('#toggle-btn')
           break;
         case 'w':
         case 'W':
@@ -67,4 +81,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .main-div{
+          text-align: center;
+      }
 </style>
