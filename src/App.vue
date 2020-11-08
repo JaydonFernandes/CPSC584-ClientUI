@@ -1,16 +1,16 @@
 <template>
-  <MainScreen/>
+  <div id="app">
+    <MainScreen/>
+  </div>
 </template>
 
 <script>
 import MainScreen from './components/MainScreen.vue'
-//import MapScreen from './components/MapScreen.vue'
 
 export default {
   name: 'App',
   components: {
-    MainScreen,
-    // MapScreen
+    MainScreen
   }
 }
 </script>
