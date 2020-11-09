@@ -3,7 +3,9 @@
     <topBar/>
     <h3>Main Screen</h3>
     <p>Press "N" to bring up robot info</p>
-    <p>All other key commads will print in the console for now...</p>
+    <p>Use W,A,S,D to control the robot.</p>
+    <p>Use arrow keys to control the camera.</p>
+    <p>Commands should send a HTTP request to http://192.168.1.67:8080/ and print to console</p>
     
     <statusModal ref="my-modal"/>
     
