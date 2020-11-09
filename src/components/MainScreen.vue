@@ -8,6 +8,7 @@
     <p>Commands should send a HTTP request to http://192.168.1.67:8080/ and print to console</p>
     
     <statusModal ref="my-modal"/>
+    <audioVisualization/>
     
   </div>
 </template>
@@ -16,11 +17,13 @@
 
 import statusModal from "./statusModal"
 import topBar from "./topBar"
+import audioVisualization from "./audioVisualization"
 export default {
   name: 'MainScreen',
   components: {
     statusModal,
-    topBar
+    topBar,
+    audioVisualization
   },
   data() {
     return {
