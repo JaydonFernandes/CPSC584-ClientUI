@@ -29,7 +29,7 @@ export default {
     return {
       mapVisible: false,
       statusVisible: false,
-      baseURL: 'http://192.168.1.67:8080/'
+      baseURL: 'http://192.168.1.67:8000/run/?'
     }
   },
   methods: {
@@ -41,21 +41,10 @@ export default {
     }
   },
   created() {
-    //event haddler for key input
-    window.addEventListener('keyup', (e) => {
+    // keydown
+    window.addEventListener('keypress', (e) => {
       console.log(`Key Press: ${e.key}`)
       switch (e.key) {
-        case 'm':
-        case 'M':
-          this.mapVisible = !this.mapVisible
-          console.log("Toggling map...")
-          break;
-        case 'n':
-        case 'N':
-          this.statusVisible = !this.statusVisible
-          console.log("Toggling statuses...")
-          this.$refs['my-modal'].$refs["mystatus"].toggle('#toggle-btn')
-          break;
         case 'w':
         case 'W':
           console.log("Driving forwards...")
@@ -91,6 +80,59 @@ export default {
         case 'ArrowDown':
           console.log("Turning camera down...")
           this.performComand('camdown')
+          break
+      }
+    });
+    //event haddler for key input
+    window.addEventListener('keyup', (e) => {
+      console.log(`Key Press: ${e.key}`)
+      switch (e.key) {
+        case 'm':
+        case 'M':
+          this.mapVisible = !this.mapVisible
+          console.log("Toggling map...")
+          break;
+        case 'n':
+        case 'N':
+          this.statusVisible = !this.statusVisible
+          console.log("Toggling statuses...")
+          this.$refs['my-modal'].$refs["mystatus"].toggle('#toggle-btn')
+          break;
+        case 'w':
+        case 'W':
+          console.log("Driving forwards...")
+          this.performComand('stop')
+          break;
+        case 'a':
+        case 'A':
+          console.log("Turning Wheels left...")
+          this.performComand('fwstraight')
+          break;
+        case 's':
+        case 'S':
+          console.log("Driving backwards...")
+          this.performComand('stop')
+          break;
+        case 'd':
+        case 'D':
+          console.log("Turning Wheels right...")
+          this.performComand('fwstraight')
+          break;
+        case 'ArrowLeft':
+          console.log("Turning camera left...")
+          this.performComand('camready')
+          break
+        case 'ArrowRight':
+          console.log("Turning camera right...")
+          this.performComand('camready')
+          break
+        case 'ArrowUp':
+          console.log("Turning camera up...")
+          this.performComand('camready')
+          break
+        case 'ArrowDown':
+          console.log("Turning camera down...")
+          this.performComand('camready')
           break
       }
     });
