@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-navbar  variant="secondary"  >
+        <b-navbar  variant="info"  >
             <b-row cols=4 align-h="start">
                 <b-col >
                     <b-icon icon="bar-chart-fill" font-scale="4" variant="success"></b-icon>

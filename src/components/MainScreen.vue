@@ -1,6 +1,7 @@
 <template>
   <div class="main-div">
     <topBar/>
+    <miniMap/>
     <h3>Main Screen</h3>
     <p>Press "N" to bring up robot info</p>
     <p>All other key commads will print in the console for now...</p>
@@ -14,11 +15,13 @@
 
 import statusModal from "./statusModal"
 import topBar from "./topBar"
+import miniMap from "./miniMap"
 export default {
   name: 'MainScreen',
   components: {
     statusModal,
-    topBar
+    topBar,
+    miniMap
   },
   data() {
     return {
