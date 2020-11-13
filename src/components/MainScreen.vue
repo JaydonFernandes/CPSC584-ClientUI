@@ -1,6 +1,7 @@
 <template>
   <div class="main-div">
     <topBar/>
+    <miniMap/>
     <h3>Main Screen</h3>
     <p>Press "N" to bring up robot info</p>
     <p>Use W,A,S,D to control the robot.</p>
@@ -17,13 +18,15 @@
 
 import statusModal from "./statusModal"
 import topBar from "./topBar"
+import miniMap from "./miniMap"
 import audioVisualization from "./audioVisualization"
 export default {
   name: 'MainScreen',
   components: {
     statusModal,
     topBar,
-    audioVisualization
+    miniMap,
+    audioVisualization,
   },
   data() {
     return {
