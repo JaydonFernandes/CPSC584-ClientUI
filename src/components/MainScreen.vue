@@ -1,15 +1,18 @@
 <template>
   <div class="main-div">
     <topBar/>
+
+    <div id="workScreen" :style="{ backgroundImage: 'url(' + image + ')' }">
+      <cameraFeed/>
+      
+      <statusModal ref="my-modal"/>
+      <audioVisualization id="audioViz"/>
+      <!-- <div id="footer">Footer will always be at the bottom</div> -->
+
+    </div>
+      
     <miniMap/>
-    <h3>Main Screen</h3>
-    <p>Press "N" to bring up robot info</p>
-    <p>Use W,A,S,D to control the robot.</p>
-    <p>Use arrow keys to control the camera.</p>
-    <p>Commands should send a HTTP request to http://192.168.1.67:8080/ and print to console</p>
     
-    <statusModal ref="my-modal"/>
-    <audioVisualization/>
     
   </div>
 </template>
@@ -20,6 +23,7 @@ import statusModal from "./statusModal"
 import topBar from "./topBar"
 import miniMap from "./miniMap"
 import audioVisualization from "./audioVisualization"
+import cameraFeed from "./cameraFeed"
 export default {
   name: 'MainScreen',
   components: {
@@ -27,12 +31,15 @@ export default {
     topBar,
     miniMap,
     audioVisualization,
+    cameraFeed,
   },
   data() {
     return {
       mapVisible: false,
       statusVisible: false,
-      baseURL: 'http://192.168.1.67:8080/'
+      baseURL: 'http://192.168.1.67:8080/',
+      image: "",
+      temp: true,
     }
   },
   methods: {
@@ -41,6 +48,12 @@ export default {
       .then(() => {
         //TODO something with the data if we need it
       })
+    },
+
+    getScreenshot(){
+      this.image = "http://192.168.1.67:8080/?action=screenshot";
+      //Get screenshot 20 times a second
+      setTimeout(this.getScreenshot, 50)
     }
   },
   created() {
@@ -97,6 +110,7 @@ export default {
           break
       }
     });
+    this.getScreenshot();
   },
   
 }
@@ -105,6 +119,33 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .main-div{
-          text-align: center;
-      }
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+  }
+  #audioViz{
+    position: absolute;
+    bottom: 0; 
+
+    left: 50%;
+    transform: translate(-50%);
+    
+  }
+  #workScreen{
+    background-color: #92a8d1;
+    background-size: cover;
+    position: absolute;
+    bottom: 0;
+    right:0;
+    left:0;
+    top: 10%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+
+  }
+   
 </style>
