@@ -32,7 +32,8 @@ export default {
     return {
       mapVisible: false,
       statusVisible: false,
-      baseURL: 'http://192.168.1.67:8080/'
+      baseURL: 'http://192.168.1.67:8080/',
+      mapToggled: false
     }
   },
   methods: {
@@ -51,7 +52,16 @@ export default {
         case 'm':
         case 'M':
           this.mapVisible = !this.mapVisible
-          console.log("Toggling map...")
+          if(!this.mapToggled) {
+            console.log("Toggling map...")
+            this.mapToggled = true
+            this.$router.push({ path: 'largeMap' }).catch(()=>{})
+          }
+          else {
+            console.log("Closing map...")
+            this.mapToggled = false
+            this.$router.replace({ path: '/' }).catch(()=>{})
+          }
           break;
         case 'n':
         case 'N':
