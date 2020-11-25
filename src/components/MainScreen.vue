@@ -52,7 +52,7 @@ export default {
     },
 
     getScreenshot(){
-      this.$http.get("https://picsum.photos/1280/720", {
+      this.$http.get("http://192.168.1.67:8080/?action=screenshot", {
           responseType: 'arraybuffer' 
       })
       .then((data) => {
