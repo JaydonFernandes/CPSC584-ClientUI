@@ -40,6 +40,7 @@ export default {
       baseURL: 'http://192.168.1.67:8080/',
       image: "",
       temp: true,
+      imageData: "",
     }
   },
   methods: {
@@ -51,10 +52,17 @@ export default {
     },
 
     getScreenshot(){
-      this.image = "";
-      this.image = "http://192.168.1.67:8080/?action=screenshot";
-      //Get screenshot 20 times a second
-      setTimeout(this.getScreenshot, 50)
+      this.$http.get("https://picsum.photos/1280/720", {
+          responseType: 'arraybuffer' 
+      })
+      .then((data) => {
+        var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(data.data)));
+        this.imageData = "data:image/jpg;base64,"+base64String;
+        
+      })
+      this.image = this.imageData
+      //Take screenshot every 1/10 second
+      setTimeout(this.getScreenshot, 100)
     }
   },
   created() {
