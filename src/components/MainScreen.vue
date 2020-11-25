@@ -51,6 +51,7 @@ export default {
     },
 
     getScreenshot(){
+      this.image = "";
       this.image = "http://192.168.1.67:8080/?action=screenshot";
       //Get screenshot 20 times a second
       setTimeout(this.getScreenshot, 50)
