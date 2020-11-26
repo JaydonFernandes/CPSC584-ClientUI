@@ -1,14 +1,16 @@
 <template>
   <div class="main-div">
     <topBar/>
-    <miniMap/>
+    <miniMap v-bind:miniMapVisible="this.miniMapVisible" ref ="myMiniMap"></miniMap>
     <h3>Main Screen</h3>
     <p>Press "N" to bring up robot info</p>
+    <p>Press "M" to bring up Map <p>
     <p>Use W,A,S,D to control the robot.</p>
     <p>Use arrow keys to control the camera.</p>
     <p>Commands should send a HTTP request to http://192.168.1.67:8080/ and print to console</p>
     
     <statusModal ref="my-modal"/>
+    <!-- <bigMap ref ="myMap"/> -->
     <audioVisualization/>
     
   </div>
@@ -20,6 +22,10 @@ import statusModal from "./statusModal"
 import topBar from "./topBar"
 import miniMap from "./miniMap"
 import audioVisualization from "./audioVisualization"
+// import bigMap from "./bigMap"
+
+
+
 export default {
   name: 'MainScreen',
   components: {
@@ -27,12 +33,16 @@ export default {
     topBar,
     miniMap,
     audioVisualization,
+    // bigMap
   },
   data() {
     return {
       mapVisible: false,
       statusVisible: false,
-      baseURL: 'http://192.168.1.67:8000/run/?'
+      baseURL: 'http://192.168.1.67:8000/run/?',
+      miniMapVisible: true,
+      mapToggled: false,
+  
     }
   },
   methods: {
@@ -93,7 +103,16 @@ export default {
           case 'm':
           case 'M':
             this.mapVisible = !this.mapVisible
+            if(!this.mapToggled) {
             console.log("Toggling map...")
+            this.mapToggled = true
+            this.$router.push({ path: 'largeMap' }).catch(()=>{})
+          }
+          else {
+            console.log("Closing map...")
+            this.mapToggled = false
+            this.$router.replace({ path: '/' }).catch(()=>{})
+          }
             break;
           case 'n':
           case 'N':
