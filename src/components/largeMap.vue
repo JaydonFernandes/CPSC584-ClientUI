@@ -1,7 +1,13 @@
 <template>
   <div class="main-div">
     <topBar/>
-    <b-container class="imageGrid">
+    
+    
+    
+    <b-container class="imageGrid" id ="imageGrid">
+        <div id="crosshair" style = 'left:0px ; top:0px'>
+            <b-img id="imgCrosshair" src = "../assets/crosshair1.png" style = 'width: 200px; height: 200px'></b-img>
+            </div>
         <b-row class="mb-3">
             <b-col><b-img v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img></b-col>
             <b-col order="1"><b-img v-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img></b-col>
@@ -18,6 +24,7 @@
             <b-col order="2"><b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image"></b-img></b-col>
         </b-row>
     </b-container>
+    
   </div>
 </template>
 
@@ -48,46 +55,97 @@ export default {
 
 created() {
     //event haddler for key input
+    // window.addEventListener('load', () =>{
+    //     cross.style.position = 'absolute';
+    //     cross.style.top = 0;
+    //     cross.style.left = 0;
+
+    // })
+
     window.addEventListener('keyup', (e) => {
-      console.log(`Key Press: ${e.key}`)
-      switch (e.key) {
-        case '1':
+        let modifier = 20;
+        var cross = document.getElementById('crosshair');
+        var grid = document.getElementById("imageGrid");
+        
+        let topCoord = 0;
+        let leftCoord = 0;
+       
+        var para;
 
-            this.img1 = true
-            break;
-        case '2':
 
-            this.img2 = true
-            break;
-        case '3':
+        console.log(`Key Press: ${e.key}`)
+        switch (e.key) {
+            
+            case 'ArrowUp':
+                cross.style.top = `${parseInt(cross.style.top) - modifier}px`;
+                topCoord = topCoord + cross.style.top;
+                console.log("topCoord " + topCoord);
+                break;
+            
+            case 'ArrowDown': 
+                cross.style.top = `${parseInt(cross.style.top) + modifier}px`;
+                topCoord = topCoord + cross.style.top;
+                console.log("topCoord " + topCoord);
+                break;
+            
+            case 'ArrowLeft':
+                cross.style.left =  `${parseInt(cross.style.left) - modifier}px`;
+                leftCoord = leftCoord + cross.style.left;
+                console.log("leftCoord " + leftCoord);
+                break;
+            
+            case 'ArrowRight': 
+                cross.style.left =  `${parseInt(cross.style.left) + modifier}px`;
+                leftCoord = leftCoord + cross.style.left;
+                console.log("leftCoord " + leftCoord);
+                break;
+            case 'Enter':
+                para = document.createElement("P");
+                para.innerText = "Marked";
+                para.style.top = topCoord;
+                para.style.left = leftCoord;
+                para.style.color 
+                grid.appendChild(para);
+                document.body.appendChild(grid);
+                
+                break;
+            
+            case '1':
+                this.img1 = true
+                break;
+            case '2':
 
-            this.img3 = true
-            break;
-        case '4':
+                this.img2 = true
+                break;
+            case '3':
 
-            this.img4 = true
-            break;
-        case '5':
+                this.img3 = true
+                break;
+            case '4':
 
-            this.img5 = true
-            break;
-        case '6':
+                this.img4 = true
+                break;
+            case '5':
 
-            this.img6 = true
-            break;
-        case '7':
+                this.img5 = true
+                break;
+            case '6':
 
-            this.img7 = true
-            break;
-        case '8':
+                this.img6 = true
+                break;
+            case '7':
 
-            this.img8 = true
-            break;
-        case '9':
+                this.img7 = true
+                break;
+            case '8':
 
-            this.img9 = true
-            break;
-           
+                this.img8 = true
+                break;
+            case '9':
+
+                this.img9 = true
+                break;
+            
       }
       
     });
@@ -100,10 +158,19 @@ created() {
 <style scoped>
     .main-div{
         text-align: center;
+        background-color: gainsboro;
         } 
     .imageGrid{
-        background-color: black;
+        background-color: gainsboro;
+        border-style:ridge;
+        border-color: grey;
         width: 100vw!important;
         height: 88vh;
+    }
+    #crosshair{
+        position: absolute;
+        z-index: 100;
+       
+       
     }
 </style>

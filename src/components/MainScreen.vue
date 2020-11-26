@@ -10,7 +10,7 @@
     <p>Commands should send a HTTP request to http://192.168.1.67:8080/ and print to console</p>
     
     <statusModal ref="my-modal"/>
-    <bigMap ref ="myMap"/>
+    <!-- <bigMap ref ="myMap"/> -->
     <audioVisualization/>
     
   </div>
@@ -22,7 +22,7 @@ import statusModal from "./statusModal"
 import topBar from "./topBar"
 import miniMap from "./miniMap"
 import audioVisualization from "./audioVisualization"
-import bigMap from "./bigMap"
+// import bigMap from "./bigMap"
 
 
 
@@ -33,7 +33,7 @@ export default {
     topBar,
     miniMap,
     audioVisualization,
-    bigMap
+    // bigMap
   },
   data() {
     return {
