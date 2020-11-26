@@ -108,9 +108,9 @@ created() {
                 para.style.width = "50px";
                 para.style.background = 'blue';
                 para.style.position = "absolute";
-                para.style.top = topCoord+'px';
+                para.style.top = topCoord + 75 +'px';
                 console.log(topCoord, leftCoord);
-                para.style.left = leftCoord+'px'
+                para.style.left = leftCoord+ 75 +'px'
                 para.style.color 
                 grid.appendChild(para);
                 document.body.appendChild(grid);
