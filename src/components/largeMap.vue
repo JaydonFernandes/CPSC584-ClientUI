@@ -54,6 +54,11 @@ export default {
   },
 
 created() {
+    var para;
+    var topCoord = 0;
+    var leftCoord = 0;
+
+    
     //event haddler for key input
     // window.addEventListener('load', () =>{
     //     cross.style.position = 'absolute';
@@ -67,43 +72,45 @@ created() {
         var cross = document.getElementById('crosshair');
         var grid = document.getElementById("imageGrid");
         
-        let topCoord = 0;
-        let leftCoord = 0;
-       
-        var para;
-
+        
+        
 
         console.log(`Key Press: ${e.key}`)
         switch (e.key) {
             
             case 'ArrowUp':
                 cross.style.top = `${parseInt(cross.style.top) - modifier}px`;
-                topCoord = topCoord + cross.style.top;
+                topCoord =  parseInt(cross.style.top);
                 console.log("topCoord " + topCoord);
                 break;
             
             case 'ArrowDown': 
                 cross.style.top = `${parseInt(cross.style.top) + modifier}px`;
-                topCoord = topCoord + cross.style.top;
+                topCoord = parseInt(cross.style.top)
                 console.log("topCoord " + topCoord);
                 break;
             
             case 'ArrowLeft':
                 cross.style.left =  `${parseInt(cross.style.left) - modifier}px`;
-                leftCoord = leftCoord + cross.style.left;
+                leftCoord = parseInt(cross.style.left);
                 console.log("leftCoord " + leftCoord);
                 break;
             
             case 'ArrowRight': 
                 cross.style.left =  `${parseInt(cross.style.left) + modifier}px`;
-                leftCoord = leftCoord + cross.style.left;
+                leftCoord = parseInt(cross.style.left);
                 console.log("leftCoord " + leftCoord);
                 break;
+            
             case 'Enter':
-                para = document.createElement("P");
-                para.innerText = "Marked";
-                para.style.top = topCoord;
-                para.style.left = leftCoord;
+                para = document.createElement("div");
+                para.style.height = "50px";
+                para.style.width = "50px";
+                para.style.background = 'blue';
+                para.style.position = "absolute";
+                para.style.top = topCoord+'px';
+                console.log(topCoord, leftCoord);
+                para.style.left = leftCoord+'px'
                 para.style.color 
                 grid.appendChild(para);
                 document.body.appendChild(grid);
