@@ -111,6 +111,7 @@ export default {
           else {
             console.log("Closing map...")
             this.mapToggled = false
+            //document.getElementById("imageGrid").remove
             this.$router.replace({ path: '/' }).catch(()=>{})
           }
             break;

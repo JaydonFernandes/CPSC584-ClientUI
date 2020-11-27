@@ -2,8 +2,6 @@
   <div class="main-div">
     <topBar/>
     
-    
-    
     <b-container class="imageGrid" id ="imageGrid">
         <div id="crosshair" style = 'left:0px ; top:0px'>
             <b-img id="imgCrosshair" src = "../assets/crosshair1.png" style = 'width: 200px; height: 200px'></b-img>
@@ -49,7 +47,9 @@ export default {
         img6: false,
         img7: false,
         img8: false,
-        img9: false
+        img9: false,
+        coord1: "", //TODO: Load coords from store
+        coord2: ""  //TODO: Load coords from store
     }
   },
 
@@ -57,23 +57,13 @@ created() {
     var para;
     var topCoord = 0;
     var leftCoord = 0;
-
-    
-    //event haddler for key input
-    // window.addEventListener('load', () =>{
-    //     cross.style.position = 'absolute';
-    //     cross.style.top = 0;
-    //     cross.style.left = 0;
-
-    // })
+    console.log("Large Map Component Created")
 
     window.addEventListener('keyup', (e) => {
         let modifier = 20;
         var cross = document.getElementById('crosshair');
         var grid = document.getElementById("imageGrid");
-        
-        
-        
+        console.log("Event listener fired")
 
         console.log(`Key Press: ${e.key}`)
         switch (e.key) {
@@ -103,6 +93,7 @@ created() {
                 break;
             
             case 'Enter':
+                /*
                 para = document.createElement("div");
                 para.style.height = "50px";
                 para.style.width = "50px";
@@ -112,8 +103,12 @@ created() {
                 console.log(topCoord, leftCoord);
                 para.style.left = leftCoord+ 75 +'px'
                 para.style.color 
+                this.coord1 = topCoord + 75 +'px';
+                this.coord2 = leftCoord+ 75 +'px'
                 grid.appendChild(para);
-                document.body.appendChild(grid);
+                document.getElementById("imageGrid").appendChild(grid);
+                */
+                this.markMap(topCoord, leftCoord, grid, para)
                 
                 break;
             
@@ -157,6 +152,28 @@ created() {
       
     });
 },
+destroyed() {
+    console.log("Destroying component")
+    //document.getElementById("pointOfInterest").remove
+},
+methods: {
+    markMap: function(topCoord, leftCoord, grid, para) {
+        console.log("Marking Map")
+        para = document.createElement("div");
+        para.style.height = "50px";
+        para.style.width = "50px";
+        para.style.background = 'blue';
+        para.style.position = "absolute";
+        para.style.top = topCoord + 75 +'px';
+        console.log(topCoord, leftCoord);
+        para.style.left = leftCoord+ 75 +'px'
+        para.style.color 
+        this.coord1 = topCoord + 75 +'px';
+        this.coord2 = leftCoord+ 75 +'px'
+        grid.appendChild(para);
+        document.getElementById("imageGrid").appendChild(grid);
+    }
+}
 }
 
 </script>
@@ -177,7 +194,5 @@ created() {
     #crosshair{
         position: absolute;
         z-index: 100;
-       
-       
     }
 </style>
