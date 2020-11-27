@@ -20,9 +20,10 @@ export default {
 
 <style scoped>
     .audiovis{
-        width: 40%;
+        /* width: 40%; */
         margin: 0 auto;
         border: 2px solid gray;
+        
     }
 
     .fill img {
