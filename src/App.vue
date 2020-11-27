@@ -1,18 +1,22 @@
 <template>
   <div id="app">
-    <MainScreen/>
+    
+    
+    <!-- <MainScreen/> -->
+    <router-view/>
   </div>
 </template>
 
 <script>
-import MainScreen from './components/MainScreen.vue'
+// import MainScreen from './components/MainScreen.vue'
 
 export default {
   name: 'App',
   components: {
-    MainScreen
+    // MainScreen
   }
 }
+
 </script>
 
 <style>

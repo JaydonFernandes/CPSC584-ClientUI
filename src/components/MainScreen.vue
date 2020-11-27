@@ -11,7 +11,7 @@
 
     </div>
       
-    <miniMap/>
+    <miniMap v-bind:miniMapVisible="this.miniMapVisible" ref ="myMiniMap"></miniMap>
     
     
   </div>
@@ -41,6 +41,9 @@ export default {
       image: "",
       temp: true,
       imageData: "",
+      miniMapVisible: true,
+      mapToggled: false,
+  
     }
   },
   methods: {
@@ -115,7 +118,17 @@ export default {
           case 'm':
           case 'M':
             this.mapVisible = !this.mapVisible
+            if(!this.mapToggled) {
             console.log("Toggling map...")
+            this.mapToggled = true
+            this.$router.push({ path: 'largeMap' }).catch(()=>{})
+          }
+          else {
+            console.log("Closing map...")
+            this.mapToggled = false
+            //document.getElementById("imageGrid").remove
+            this.$router.replace({ path: '/' }).catch(()=>{})
+          }
             break;
           case 'n':
           case 'N':
