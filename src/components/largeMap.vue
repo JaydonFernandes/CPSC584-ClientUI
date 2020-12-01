@@ -52,17 +52,21 @@ export default {
         coord2: ""  //TODO: Load coords from store
     }
   },
-
+  computed: {
+      coordinates() {
+          return this.$store.getters.coordinates
+      }
+  },
 created() {
     var para;
     var topCoord = 0;
     var leftCoord = 0;
     console.log("Large Map Component Created")
+    //this.checkCoords()
 
     window.addEventListener('keyup', (e) => {
         let modifier = 20;
         var cross = document.getElementById('crosshair');
-        var grid = document.getElementById("imageGrid");
         console.log("Event listener fired")
 
         console.log(`Key Press: ${e.key}`)
@@ -93,22 +97,7 @@ created() {
                 break;
             
             case 'Enter':
-                /*
-                para = document.createElement("div");
-                para.style.height = "50px";
-                para.style.width = "50px";
-                para.style.background = 'blue';
-                para.style.position = "absolute";
-                para.style.top = topCoord + 75 +'px';
-                console.log(topCoord, leftCoord);
-                para.style.left = leftCoord+ 75 +'px'
-                para.style.color 
-                this.coord1 = topCoord + 75 +'px';
-                this.coord2 = leftCoord+ 75 +'px'
-                grid.appendChild(para);
-                document.getElementById("imageGrid").appendChild(grid);
-                */
-                this.markMap(topCoord, leftCoord, grid, para)
+                this.markMap(topCoord, leftCoord, para)
                 
                 break;
             
@@ -152,26 +141,55 @@ created() {
       
     });
 },
+mounted() {
+    console.log("Component mounted")
+    this.checkCoords()
+},
 destroyed() {
     console.log("Destroying component")
     //document.getElementById("pointOfInterest").remove
 },
 methods: {
-    markMap: function(topCoord, leftCoord, grid, para) {
+    markMap: function(topCoord, leftCoord, para) {
         console.log("Marking Map")
+        var grid = document.getElementById("imageGrid");
         para = document.createElement("div");
         para.style.height = "50px";
         para.style.width = "50px";
         para.style.background = 'blue';
         para.style.position = "absolute";
         para.style.top = topCoord + 75 +'px';
-        console.log(topCoord, leftCoord);
         para.style.left = leftCoord+ 75 +'px'
         para.style.color 
-        this.coord1 = topCoord + 75 +'px';
-        this.coord2 = leftCoord+ 75 +'px'
+        this.$store.commit('addCoordinates', {
+            xcoord: topCoord + 75 +'px',
+            ycoord: leftCoord+ 75 +'px'
+        })
         grid.appendChild(para);
         document.getElementById("imageGrid").appendChild(grid);
+    },
+    checkCoords: function(para) {
+        // if there are existing coordinates in the store, mark them again
+        if(!this.$store.getters.coordinates.length == 0) {
+            this.$store.getters.coordinates.forEach(coords =>{
+                //this.markMap(coords.xcord, coords.ycord, para)
+                var grid = document.getElementById("imageGrid");
+                console.log("COORDS")
+                console.log(coords)
+                para = document.createElement("div");
+                para.style.height = "50px";
+                para.style.width = "50px";
+                para.style.background = 'blue';
+                para.style.position = "absolute";
+                para.style.top = coords.xcoord
+                para.style.left = coords.ycoord
+                para.style.color 
+                console.log(para.style.top, para.style.left)
+                grid.appendChild(para);
+                //document.getElementById("imageGrid").appendChild(grid);
+            })
+        
+        }
     }
 }
 }
