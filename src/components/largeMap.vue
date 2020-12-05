@@ -11,18 +11,47 @@
                 <b-img v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
-            <b-col order="1"><b-img v-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-        </b-row>
-                <b-row class="mb-3">
-            <b-col><b-img v-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="1"><b-img v-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col order="1">
+                <b-img v-if= "this.currentTile == 2" src="../assets/worldMap/active_image_part_002.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="2">
+                <b-img v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image">
+                </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
         </b-row>
         <b-row class="mb-3">
-            <b-col><b-img v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="1"><b-img v-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col>
+                <b-img v-if= "this.currentTile == 4" src="../assets/worldMap/active_image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="1">
+                <b-img v-if= "this.currentTile == 5" src="../assets/worldMap/active_image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="2">
+                <b-img v-if= "this.currentTile == 6" src="../assets/worldMap/active_image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+        </b-row>
+        <b-row class="mb-3">
+            <b-col>
+                <b-img v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="1">
+                <b-img v-if= "this.currentTile == 8" src="../assets/worldMap/active_image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="2">
+                <b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image">
+                </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
         </b-row>
     </b-container>
     
@@ -52,8 +81,16 @@ export default {
         img7: false,
         img8: false,
         img9: false,
-        coord1: "", //TODO: Load coords from store
-        coord2: "",  //TODO: Load coords from store
+        img1Active: false,
+        img2Active: false,
+        img3Active: false,
+        img4Active: false,
+        img5Active: false,
+        img6Active: false,
+        img7Active: false,
+        img8Active: false,
+        img9Active: false,
+        currentTile: 0,
         para: "",
         topCoord: 0,
         leftCoord: 0
@@ -67,18 +104,17 @@ export default {
   },
 created() {
     console.log("Large Map Component Created")
-
     window.addEventListener('keyup', this.keyupHandler);
 },
 mounted() {
     console.log("Component mounted")
     this.checkCoords();
     this.checkFoundTiles();
+    this.checkCurrentTile();
 },
 destroyed() {
     console.log("Destroying component")
     window.removeEventListener('keyup', this.keyupHandler);
-    //document.getElementById("pointOfInterest").remove
 },
 methods: {
     markMap: function(topCoord, leftCoord, para) {
@@ -170,6 +206,10 @@ methods: {
         if (this.$store.state.tiles[8]) {
             this.img9 = true;
         }
+    },
+
+    checkCurrentTile() {
+        this.currentTile = this.$store.getters.currentTile
     },
 
     keyupHandler(e){
@@ -268,6 +308,14 @@ methods: {
         width: 100vw!important;
         height: 88vh;
     }
+    /*
+    .fill {
+        width: 100%;
+    }
+    .fill img {
+        width: 100%;
+    }
+    */
     #crosshair{
         position: absolute;
         z-index: 100;

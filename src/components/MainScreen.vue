@@ -1,13 +1,12 @@
 <template>
   <div class="main-div">
-    <topBar/>
+    <topBar ref ="topBarRef" v-bind:lightOn="this.lightOn" />
 
     <div id="workScreen" :style="{ backgroundImage: 'url(' + image + ')' }">
       <cameraFeed/>
       
       <statusModal ref="my-modal"/>
       <audioVisualization id="audioViz"/>
-      <!-- <div id="footer">Footer will always be at the bottom</div> -->
 
     </div>
       
@@ -44,6 +43,7 @@ export default {
       miniMapVisible: true,
       mapToggled: false,
       tileNum: 0,
+      lightOn: false
   
     }
   },
@@ -78,6 +78,10 @@ export default {
         this.$refs['myMiniMap'].setMapSource(this.tileNum);
         console.log("QR Code data")
         console.log(response.data)
+        this.$store.commit('updateTemp', response.data.temp)
+        this.$store.commit('updateNoise', response.data.noise)
+        this.$store.state.noise = response.data.noise;
+        this.$store.state.currentTile = this.calculateTileNumber(response.data.x, response.data.y)
         this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ] = true;
       })
       this.image = this.imageData
@@ -173,6 +177,12 @@ export default {
           case 'D':
             console.log("Up: Turning Wheels right...")
             this.performComand('fwstraight')
+            break;
+          case 'l':
+          case 'L':
+            console.log("Toggling lights")
+            this.lightOn = !this.lightOn
+            console.log(this.l)
             break;
           case 'ArrowLeft':
             console.log("Up: Turning camera left...")
