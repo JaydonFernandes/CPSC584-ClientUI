@@ -13,13 +13,13 @@
                 
                 <b-col>
                     <b-icon icon="thermometer-half" font-scale="4" variant="danger"></b-icon>
-                    <h5>25%</h5>
+                    <h5>{{ this.temperature + " °C"}}</h5>
                 </b-col>
                 
                 <b-col>
                     <b-iconstack font-scale="5">
                         <b-icon stacked icon="brightness-high-fill" variant="warning" scale="0.75"></b-icon>
-                        <b-icon stacked icon="slash-circle" variant="danger"></b-icon>
+                        <b-icon v-if="!this.lightOn" stacked icon="slash-circle" variant="danger"></b-icon>
                     </b-iconstack>
                 </b-col>
                 
@@ -31,6 +31,21 @@
 <script>
 export default {
     name: "topBar",
+    props:{
+        lightOn: Boolean
+    },
+    data() {
+        return {
+            temp: 0
+        }
+    },
+    computed: {
+        
+        temperature() {
+            return this.$store.getters.temp
+        }
+        
+    }
 
 }
 </script>

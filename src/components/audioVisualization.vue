@@ -1,8 +1,8 @@
 <template>
     <div class="audiovis">
         <div class="fill">
-            <img v-if="!audioDetected" src="../assets/noaudio.jpg">
-            <img v-if="audioDetected" src="../assets/audiodetected.jpg">
+            <img v-if="!this.noise" src="../assets/noaudio.jpg">
+            <img v-if="this.noise" src="../assets/audiodetected.jpg">
         </div>
     </div>
 </template>
@@ -12,8 +12,13 @@ export default {
     name: "audioVisualization",
     data() {
         return {
-            audioDetected: false
+            
         }
+    },
+    computed: {
+        noise() {
+            return this.$store.getters.noise
+        } 
     }
 }
 </script>

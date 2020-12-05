@@ -1,6 +1,6 @@
 <template>
   <div class="main-div">
-    <topBar/>
+    <topBar ref ="topBarRef" v-bind:lightOn="this.lightOn" />
 
     <div id="workScreen" :style="{ backgroundImage: 'url(' + image + ')' }">
       <cameraFeed/>
@@ -44,6 +44,7 @@ export default {
       miniMapVisible: true,
       mapToggled: false,
       tileNum: 0,
+      lightOn: false
   
     }
   },
@@ -76,8 +77,13 @@ export default {
       .then((response) => {
         this.tileNum = this.calculateTileNumber(response.data.x, response.data.y);
         this.$refs['myMiniMap'].setMapSource(this.tileNum);
+        //this.$refs['topBarRef'].setTemp(response.data.temp);
         console.log("QR Code data")
         console.log(response.data)
+        //this.$store.state.temp = response.data.temp;
+        this.$store.commit('updateTemp', response.data.temp)
+        this.$store.commit('updateNoise', response.data.noise)
+        this.$store.state.noise = response.data.noise;
         this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ] = true;
       })
       this.image = this.imageData
@@ -173,6 +179,12 @@ export default {
           case 'D':
             console.log("Up: Turning Wheels right...")
             this.performComand('fwstraight')
+            break;
+          case 'l':
+          case 'L':
+            console.log("Toggling lights")
+            this.lightOn = !this.lightOn
+            console.log(this.l)
             break;
           case 'ArrowLeft':
             console.log("Up: Turning camera left...")

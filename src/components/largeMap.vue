@@ -8,21 +8,50 @@
             </div>
         <b-row class="mb-3">
             <b-col>
-                <b-img v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="1">
+                <b-img class="fill" v-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= "!img2 && img2Active" src="../assets/worldMap/active_image_part_002.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
-            <b-col order="1"><b-img v-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-        </b-row>
-                <b-row class="mb-3">
-            <b-col><b-img v-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="1"><b-img v-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col order="2">
+                <b-img class="fill" v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image">
+                </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
         </b-row>
         <b-row class="mb-3">
-            <b-col><b-img v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="1"><b-img v-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col>
+                <b-img class="fill" v-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= "!img4 && img4Active" src="../assets/worldMap/active_image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="1">
+                <b-img class="fill" v-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= "!img5 && img5Active" src="../assets/worldMap/active_image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="2">
+                <b-img class="fill" v-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= "!img6 && img6Active" src="../assets/worldMap/active_image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+        </b-row>
+        <b-row class="mb-3">
+            <b-col>
+                <b-img class="fill" v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="1">
+                <b-img class="fill" v-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= "!img8 && img8Active" src="../assets/worldMap/active_image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="2">
+                <b-img class="fill" v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image">
+                </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
         </b-row>
     </b-container>
     
@@ -52,8 +81,15 @@ export default {
         img7: false,
         img8: false,
         img9: false,
-        coord1: "", //TODO: Load coords from store
-        coord2: "",  //TODO: Load coords from store
+        img1Active: false,
+        img2Active: false,
+        img3Active: false,
+        img4Active: false,
+        img5Active: false,
+        img6Active: false,
+        img7Active: false,
+        img8Active: false,
+        img9Active: false,
         para: "",
         topCoord: 0,
         leftCoord: 0
@@ -268,6 +304,14 @@ methods: {
         width: 100vw!important;
         height: 88vh;
     }
+    /*
+    .fill {
+        width: 100%;
+    }
+    .fill img {
+        width: 100%;
+    }
+    */
     #crosshair{
         position: absolute;
         z-index: 100;
