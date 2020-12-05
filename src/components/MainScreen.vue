@@ -43,11 +43,13 @@ export default {
       imageData: "",
       miniMapVisible: true,
       mapToggled: false,
+      tileNum: 0,
   
     }
   },
   methods: {
     performComand(cmd){
+      console.log(cmd);
       this.$http.get(this.baseURL, { params: { action: cmd } })
       .then((response) => {
         console.log(response);
@@ -66,10 +68,26 @@ export default {
       this.image = this.imageData
       //Take screenshot every 1/10 second
       setTimeout(this.getScreenshot, 100)
-    }
-  },
-  created() {
-    window.addEventListener('keydown', (e) => {
+    },
+
+    getQrCodeData(){
+      this.$http.get("http://pages.cpsc.ucalgary.ca/~jaydon.fernandes/tile.json", {
+      })
+      .then((response) => {
+        this.tileNum = this.calculateTileNumber(response.data.x, response.data.y);
+        this.$refs['myMiniMap'].setMapSource(this.tileNum);
+        console.log("QR Code data")
+        console.log(response.data)
+        this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ] = true;
+      })
+      this.image = this.imageData
+      //Take screenshot every 1 second
+      setTimeout(this.getQrCodeData, 1000)
+    },
+    calculateTileNumber(x, y){
+      return (3*(y-1)+x);
+    },
+    keydownHandler(e){
       if (!e.repeat) {
         switch (e.key) {
           case 'w':
@@ -110,9 +128,9 @@ export default {
             break
         }
       }
-    });
-    //event haddler for key input
-    window.addEventListener('keyup', (e) => {
+    },
+
+    keyupHandler(e){
       if (!e.repeat) {
         switch (e.key) {
           case 'm':
@@ -126,7 +144,7 @@ export default {
           else {
             console.log("Closing map...")
             this.mapToggled = false
-            //document.getElementById("imageGrid").remove
+            document.getElementById("imageGrid").remove
             this.$router.replace({ path: '/' }).catch(()=>{})
           }
             break;
@@ -174,8 +192,18 @@ export default {
             break
         }
       }
-    });
+    }
+  },
+  created() {
+    window.addEventListener('keydown', this.keydownHandler);
+    //event haddler for key input
+    window.addEventListener('keyup', this.keyupHandler);
     this.getScreenshot();
+    this.getQrCodeData();
+  },
+  destroyed() {
+    window.removeEventListener('keydown', this.keydownHandler);
+    window.removeEventListener('keyup', this.keyupHandler);
   },
   
 }
