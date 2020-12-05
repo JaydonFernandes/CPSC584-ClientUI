@@ -73,9 +73,9 @@ export default {
       this.$http.get("http://pages.cpsc.ucalgary.ca/~jaydon.fernandes/tile.json", {
       })
       .then((response) => {
-        console.log(this.calculateTileNumber(response.data.x, response.data.y)-1);
+        console.log("QR Code data")
+        console.log(response.data)
         this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ] = true;
-        console.log(this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ]);
       })
       this.image = this.imageData
       //Take screenshot every 1/10 second
@@ -143,7 +143,7 @@ export default {
           else {
             console.log("Closing map...")
             this.mapToggled = false
-            //document.getElementById("imageGrid").remove
+            document.getElementById("imageGrid").remove
             this.$router.replace({ path: '/' }).catch(()=>{})
           }
             break;
@@ -193,7 +193,7 @@ export default {
       }
     });
     // this.getScreenshot();
-    //this.getQrCodeData();
+    this.getQrCodeData();
   },
   
 }
