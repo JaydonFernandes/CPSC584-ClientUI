@@ -48,10 +48,11 @@ export default {
   },
   methods: {
     performComand(cmd){
-      this.$http.get(this.baseURL, { params: { action: cmd } })
-      .then((response) => {
-        console.log(response);
-      });
+      console.log(cmd);
+      // this.$http.get(this.baseURL, { params: { action: cmd } })
+      // .then((response) => {
+      //   console.log(response);
+      // });
     },
 
     getScreenshot(){
@@ -66,6 +67,22 @@ export default {
       this.image = this.imageData
       //Take screenshot every 1/10 second
       setTimeout(this.getScreenshot, 100)
+    },
+
+    getQrCodeData(){
+      this.$http.get("http://pages.cpsc.ucalgary.ca/~jaydon.fernandes/tile.json", {
+      })
+      .then((response) => {
+        console.log(this.calculateTileNumber(response.data.x, response.data.y)-1);
+        this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ] = true;
+        console.log(this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ]);
+      })
+      this.image = this.imageData
+      //Take screenshot every 1/10 second
+      setTimeout(this.getQrCodeData, 5000)
+    },
+    calculateTileNumber(x, y){
+      return (3*(y-1)+x);
     }
   },
   created() {
@@ -175,7 +192,8 @@ export default {
         }
       }
     });
-    this.getScreenshot();
+    // this.getScreenshot();
+    //this.getQrCodeData();
   },
   
 }

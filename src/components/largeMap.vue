@@ -7,19 +7,22 @@
             <b-img id="imgCrosshair" src = "../assets/crosshair1.png" style = 'width: 200px; height: 200px'></b-img>
             </div>
         <b-row class="mb-3">
-            <b-col><b-img v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="1"><b-img v-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col>
+                <b-img v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+            </b-col>
+            <b-col order="1"><b-img v-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col order="2"><b-img v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
         </b-row>
                 <b-row class="mb-3">
-            <b-col><b-img v-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="1"><b-img v-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="2"><b-img v-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col><b-img v-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col order="1"><b-img v-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col order="2"><b-img v-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
         </b-row>
         <b-row class="mb-3">
-            <b-col><b-img v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img></b-col>
-            <b-col order="1"><b-img v-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img> </b-col>
-            <b-col order="2"><b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col><b-img v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col order="1"><b-img v-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
+            <b-col order="2"><b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image"></b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img></b-col>
         </b-row>
     </b-container>
     
@@ -49,7 +52,8 @@ export default {
         img8: false,
         img9: false,
         coord1: "", //TODO: Load coords from store
-        coord2: ""  //TODO: Load coords from store
+        coord2: "",  //TODO: Load coords from store
+
     }
   },
   computed: {
@@ -71,6 +75,10 @@ created() {
 
         console.log(`Key Press: ${e.key}`)
         switch (e.key) {
+            case 'm':
+            case 'M':
+                this.$router.replace({ path: '/' }).catch(()=>{})
+                break;
             
             case 'ArrowUp':
                 cross.style.top = `${parseInt(cross.style.top) - modifier}px`;
@@ -97,8 +105,11 @@ created() {
                 break;
             
             case 'Enter':
+                para = document.createElement("marker");
                 this.markMap(topCoord, leftCoord, para)
                 
+                console.log("PARA")
+                console.log(para)
                 break;
             
             case '1':
@@ -143,7 +154,8 @@ created() {
 },
 mounted() {
     console.log("Component mounted")
-    this.checkCoords()
+    this.checkCoords();
+    this.checkFoundTiles();
 },
 destroyed() {
     console.log("Destroying component")
@@ -189,6 +201,36 @@ methods: {
                 //document.getElementById("imageGrid").appendChild(grid);
             })
         
+        }
+    },
+
+    checkFoundTiles(){
+        if (this.$store.state.tiles[0]) {
+            this.img1 = true;
+        }
+        if (this.$store.state.tiles[1]) {
+            this.img2 = true;
+        }
+        if (this.$store.state.tiles[2]) {
+            this.img3 = true;
+        }
+        if (this.$store.state.tiles[3]) {
+            this.img4 = true;
+        }
+        if (this.$store.state.tiles[4]) {
+            this.img5 = true;
+        }
+        if (this.$store.state.tiles[5]) {
+            this.img6 = true;
+        }
+        if (this.$store.state.tiles[6]) {
+            this.img7 = true;
+        }
+        if (this.$store.state.tiles[7]) {
+            this.img8 = true;
+        }
+        if (this.$store.state.tiles[8]) {
+            this.img9 = true;
         }
     }
 }

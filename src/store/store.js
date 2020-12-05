@@ -5,9 +5,19 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        coordinates: [
-           
+        coordinates: [],
+        tiles: [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
         ]
+
     },
     mutations: {
         addCoordinates(state, payload) {
@@ -20,4 +30,4 @@ export const store = new Vuex.Store({
         }
     }
 
-})
+});
