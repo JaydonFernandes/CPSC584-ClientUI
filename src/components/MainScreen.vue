@@ -7,7 +7,6 @@
       
       <statusModal ref="my-modal"/>
       <audioVisualization id="audioViz"/>
-      <!-- <div id="footer">Footer will always be at the bottom</div> -->
 
     </div>
       
@@ -77,10 +76,8 @@ export default {
       .then((response) => {
         this.tileNum = this.calculateTileNumber(response.data.x, response.data.y);
         this.$refs['myMiniMap'].setMapSource(this.tileNum);
-        //this.$refs['topBarRef'].setTemp(response.data.temp);
         console.log("QR Code data")
         console.log(response.data)
-        //this.$store.state.temp = response.data.temp;
         this.$store.commit('updateTemp', response.data.temp)
         this.$store.commit('updateNoise', response.data.noise)
         this.$store.state.noise = response.data.noise;

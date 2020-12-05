@@ -8,48 +8,48 @@
             </div>
         <b-row class="mb-3">
             <b-col>
-                <b-img class="fill" v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="1">
-                <b-img class="fill" v-if= "this.currentTile == 2" src="../assets/worldMap/active_image_part_002.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= "this.currentTile == 2" src="../assets/worldMap/active_image_part_002.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
-                <b-img class="fill" v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image">
+                <b-img v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image">
                 </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
         </b-row>
         <b-row class="mb-3">
             <b-col>
-                <b-img class="fill" v-if= "this.currentTile == 4" src="../assets/worldMap/active_image_part_004.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= "this.currentTile == 4" src="../assets/worldMap/active_image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="1">
-                <b-img class="fill" v-if= "this.currentTile == 5" src="../assets/worldMap/active_image_part_005.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= "this.currentTile == 5" src="../assets/worldMap/active_image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
-                <b-img class="fill" v-if= "this.currentTile == 6" src="../assets/worldMap/active_image_part_006.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= "this.currentTile == 6" src="../assets/worldMap/active_image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
         </b-row>
         <b-row class="mb-3">
             <b-col>
-                <b-img class="fill" v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="1">
-                <b-img class="fill" v-if= "this.currentTile == 8" src="../assets/worldMap/active_image_part_008.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= "this.currentTile == 8" src="../assets/worldMap/active_image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-else-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
-                <b-img class="fill" v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image">
+                <b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image">
                 </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
         </b-row>
@@ -115,7 +115,6 @@ mounted() {
 destroyed() {
     console.log("Destroying component")
     window.removeEventListener('keyup', this.keyupHandler);
-    //document.getElementById("pointOfInterest").remove
 },
 methods: {
     markMap: function(topCoord, leftCoord, para) {
@@ -211,7 +210,6 @@ methods: {
 
     checkCurrentTile() {
         this.currentTile = this.$store.getters.currentTile
-        //console.log("Current tile: " + this.currentTile)
     },
 
     keyupHandler(e){
