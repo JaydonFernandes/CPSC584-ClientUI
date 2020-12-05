@@ -31,6 +31,7 @@
 
 <script>
 import topBar from "../components/topBar"
+var marker = 0;
 
 
 export default {
@@ -105,11 +106,7 @@ created() {
                 break;
             
             case 'Enter':
-                para = document.createElement("marker");
-                this.markMap(topCoord, leftCoord, para)
-                
-                console.log("PARA")
-                console.log(para)
+                this.markMap(topCoord, leftCoord, para) 
                 break;
             
             case '1':
@@ -163,22 +160,44 @@ destroyed() {
 },
 methods: {
     markMap: function(topCoord, leftCoord, para) {
-        console.log("Marking Map")
-        var grid = document.getElementById("imageGrid");
-        para = document.createElement("div");
-        para.style.height = "50px";
-        para.style.width = "50px";
-        para.style.background = 'blue';
-        para.style.position = "absolute";
-        para.style.top = topCoord + 75 +'px';
-        para.style.left = leftCoord+ 75 +'px'
-        para.style.color 
-        this.$store.commit('addCoordinates', {
-            xcoord: topCoord + 75 +'px',
-            ycoord: leftCoord+ 75 +'px'
+        marker +=  1;
+        var x = document.elementsFromPoint(leftCoord + 75, topCoord + 75)
+        var y = x[2].id;
+
+         if(y == "imageGrid" || x[2].className == "img-fluid"){
+           
+            console.log("Marking Map")
+            console.log(topCoord + 75 +'px');
+            console.log(leftCoord + 75 + 'px');
+            var grid = document.getElementById("imageGrid");
+            para = document.createElement("div");
+            para.setAttribute("id", marker);
+            para.style.height = "50px";
+            para.style.width = "50px";
+            para.style.background = 'blue';
+            para.style.position = "absolute";
+            para.style.top = topCoord + 75 +'px';
+            para.style.left = leftCoord + 75 +'px';
+            para.style.color 
+            this.$store.commit('addCoordinates', {
+                xcoord: topCoord + 75 +'px',
+                ycoord: leftCoord+ 75 +'px'
         })
         grid.appendChild(para);
         document.getElementById("imageGrid").appendChild(grid);
+            
+        }
+        else{
+            var checkTopCoord = x[2].style.top;
+            var checkLeftCoord = x[2].style.left;
+            console.log(checkTopCoord, checkLeftCoord);
+            this.$store.commit('deleteCoord',{
+                xcoord : checkTopCoord,
+                ycoord: checkLeftCoord
+            })
+            x[2].remove();
+        }
+            
     },
     checkCoords: function(para) {
         // if there are existing coordinates in the store, mark them again
