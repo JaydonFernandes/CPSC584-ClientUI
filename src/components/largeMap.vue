@@ -12,8 +12,8 @@
                 <b-img class="fill" v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="1">
-                <b-img class="fill" v-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= "!img2 && img2Active" src="../assets/worldMap/active_image_part_002.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-if= "this.currentTile == 2" src="../assets/worldMap/active_image_part_002.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= img2 src="../assets/worldMap/image_part_002.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
@@ -23,18 +23,18 @@
         </b-row>
         <b-row class="mb-3">
             <b-col>
-                <b-img class="fill" v-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= "!img4 && img4Active" src="../assets/worldMap/active_image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-if= "this.currentTile == 4" src="../assets/worldMap/active_image_part_004.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="1">
-                <b-img class="fill" v-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= "!img5 && img5Active" src="../assets/worldMap/active_image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-if= "this.currentTile == 5" src="../assets/worldMap/active_image_part_005.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= img5 src="../assets/worldMap/image_part_005.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
-                <b-img class="fill" v-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= "!img6 && img6Active" src="../assets/worldMap/active_image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-if= "this.currentTile == 6" src="../assets/worldMap/active_image_part_006.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= img6 src="../assets/worldMap/image_part_006.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
         </b-row>
@@ -44,8 +44,8 @@
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="1">
-                <b-img class="fill" v-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img>
-                <b-img class="fill" v-else-if= "!img8 && img8Active" src="../assets/worldMap/active_image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-if= "this.currentTile == 8" src="../assets/worldMap/active_image_part_008.jpg" fluid alt="Responsive image"></b-img>
+                <b-img class="fill" v-else-if= img8 src="../assets/worldMap/image_part_008.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
@@ -90,6 +90,7 @@ export default {
         img7Active: false,
         img8Active: false,
         img9Active: false,
+        currentTile: 0,
         para: "",
         topCoord: 0,
         leftCoord: 0
@@ -103,13 +104,13 @@ export default {
   },
 created() {
     console.log("Large Map Component Created")
-
     window.addEventListener('keyup', this.keyupHandler);
 },
 mounted() {
     console.log("Component mounted")
     this.checkCoords();
     this.checkFoundTiles();
+    this.checkCurrentTile();
 },
 destroyed() {
     console.log("Destroying component")
@@ -206,6 +207,11 @@ methods: {
         if (this.$store.state.tiles[8]) {
             this.img9 = true;
         }
+    },
+
+    checkCurrentTile() {
+        this.currentTile = this.$store.getters.currentTile
+        //console.log("Current tile: " + this.currentTile)
     },
 
     keyupHandler(e){

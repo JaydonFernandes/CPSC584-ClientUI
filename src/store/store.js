@@ -18,7 +18,8 @@ export const store = new Vuex.Store({
             false
         ],
         temp: 0,
-        noise: false
+        noise: false,
+        currentTile: 0
     },
     mutations: {
         addCoordinates(state, payload) {
@@ -51,6 +52,9 @@ export const store = new Vuex.Store({
         },
         noise(state) {
             return state.noise
+        },
+        currentTile(state) {
+            return state.currentTile
         }
     }
 

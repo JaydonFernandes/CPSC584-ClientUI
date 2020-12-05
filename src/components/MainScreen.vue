@@ -84,6 +84,7 @@ export default {
         this.$store.commit('updateTemp', response.data.temp)
         this.$store.commit('updateNoise', response.data.noise)
         this.$store.state.noise = response.data.noise;
+        this.$store.state.currentTile = this.calculateTileNumber(response.data.x, response.data.y)
         this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ] = true;
       })
       this.image = this.imageData
