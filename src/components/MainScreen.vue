@@ -43,7 +43,7 @@ export default {
       miniMapVisible: true,
       mapToggled: false,
       tileNum: 0,
-      lightOn: false
+      lightOn: false,
   
     }
   },
@@ -57,7 +57,8 @@ export default {
     },
 
     getScreenshot(){
-      this.$http.get("http://192.168.1.67:8080/?action=screenshot", {
+      console.log("getting screenshot")
+      this.$http.get("https://picsum.photos/200/300", {
           responseType: 'arraybuffer' 
       })
       .then((data) => {
@@ -65,9 +66,6 @@ export default {
         this.imageData = "data:image/jpg;base64,"+base64String;
         
       })
-      this.image = this.imageData
-      //Take screenshot every 1/10 second
-      setTimeout(this.getScreenshot, 100)
     },
 
     getQrCodeData(){
@@ -84,8 +82,6 @@ export default {
         this.$store.state.currentTile = this.calculateTileNumber(response.data.x, response.data.y)
         this.$store.state.tiles[ this.calculateTileNumber(response.data.x, response.data.y)-1 ] = true;
       })
-      this.image = this.imageData
-      //Take screenshot every 1 second
       setTimeout(this.getQrCodeData, 1000)
     },
     calculateTileNumber(x, y){
@@ -207,7 +203,11 @@ export default {
     window.addEventListener('keydown', this.keydownHandler);
     //event haddler for key input
     window.addEventListener('keyup', this.keyupHandler);
+    console.log("init screenshot")
     this.getScreenshot();
+    setInterval(()=>{
+      this.image = this.$store.state.screenshotImage;
+    }, 100)
     this.getQrCodeData();
   },
   destroyed() {

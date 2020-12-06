@@ -19,7 +19,8 @@ export const store = new Vuex.Store({
         ],
         temp: 0,
         noise: false,
-        currentTile: 0
+        currentTile: 0,
+        screenshotImage: ""
     },
     mutations: {
         addCoordinates(state, payload) {
