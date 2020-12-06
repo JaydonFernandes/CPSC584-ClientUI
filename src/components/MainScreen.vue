@@ -36,7 +36,7 @@ export default {
     return {
       mapVisible: false,
       statusVisible: false,
-      baseURL: 'http://192.168.1.67:8000/run/?',
+      baseURL: 'http://192.168.1.70:8000/run/?',
       image: "",
       temp: true,
       imageData: "",
@@ -207,7 +207,7 @@ export default {
     this.getScreenshot();
     setInterval(()=>{
       this.image = this.$store.state.screenshotImage;
-    }, 100)
+    }, 300)
     this.getQrCodeData();
   },
   destroyed() {

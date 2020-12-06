@@ -41,7 +41,7 @@ export default {
   },
   created() {
     console.log("App created");
-    this.screenshotInterval = setInterval( this.getScreenshot, 100)
+    this.screenshotInterval = setInterval( this.getScreenshot, 300)
   }
 }
 
