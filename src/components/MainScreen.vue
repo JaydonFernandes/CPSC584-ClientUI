@@ -182,7 +182,6 @@ export default {
           case 'L':
             console.log("Toggling lights")
             this.lightOn = !this.lightOn
-            console.log(this.l)
             break;
           case 'ArrowLeft':
             console.log("Up: Turning camera left...")
