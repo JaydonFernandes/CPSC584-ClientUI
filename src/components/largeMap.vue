@@ -311,12 +311,8 @@ methods: {
     .row.no-gutters {
         margin-right: 0;
         margin-left: 0;
-
-        & > [class^="col-"],
-        & > [class*="col-"] {
-            padding-right: 0;
-            padding-left: 0;
-        }
+        padding-right: 0;
+        padding-left: 0;
     }
     .img {
         border: 1px solid black;
