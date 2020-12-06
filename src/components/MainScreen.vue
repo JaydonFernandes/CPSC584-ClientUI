@@ -58,7 +58,7 @@ export default {
 
     getScreenshot(){
       console.log("getting screenshot")
-      this.$http.get("https://picsum.photos/200/300", {
+      this.$http.get("http://192.168.1.70:8000/run/?action=qr", {
           responseType: 'arraybuffer' 
       })
       .then((data) => {
@@ -69,7 +69,7 @@ export default {
     },
 
     getQrCodeData(){
-      this.$http.get("http://pages.cpsc.ucalgary.ca/~jaydon.fernandes/tile.json", {
+      this.$http.get("http://192.168.1.70:8000/run/?action=lasttile", {
       })
       .then((response) => {
         this.tileNum = this.calculateTileNumber(response.data.x, response.data.y);

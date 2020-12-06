@@ -23,7 +23,7 @@ export default {
   methods: {
     getScreenshot(){
       console.log("App screenshot")
-      this.$http.get("https://picsum.photos/200/300", {
+      this.$http.get("http://192.168.1.70:8000/run/?action=qr", {
           responseType: 'arraybuffer' 
       })
       .then((data) => {
