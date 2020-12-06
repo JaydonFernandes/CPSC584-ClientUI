@@ -85,6 +85,7 @@ methods: {
         marker +=  1;
         var x = document.elementsFromPoint(leftCoord + 75, topCoord + 75)
         var y = x[2].id;
+        console.log(x);
 
          if(y == "imageGrid" || x[2].className == "img-fluid"){
            
@@ -92,15 +93,15 @@ methods: {
             console.log(topCoord + 75 +'px');
             console.log(leftCoord + 75 + 'px');
             var grid = document.getElementById("imageGrid");
-            para = document.createElement("div");
+            para = new Image(50,50);
             para.setAttribute("id", marker);
-            para.style.height = "50px";
-            para.style.width = "50px";
-            para.style.background = 'blue';
+            // para.style.height = "50px";
+            // para.style.width = "50px";
+            // para.style.background = 'blue';
+            para.src = '../assets/x.jpg';
             para.style.position = "absolute";
             para.style.top = topCoord + 75 +'px';
             para.style.left = leftCoord + 75 +'px';
-            para.style.color 
             this.$store.commit('addCoordinates', {
                 xcoord: topCoord + 75 +'px',
                 ycoord: leftCoord+ 75 +'px'
