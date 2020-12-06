@@ -15,8 +15,7 @@
                     <b-col><b-icon icon="check-circle-fill" variant="success"></b-icon></b-col>
                 </b-row>
                 <b-row align-v="center">
-                    <b-col>Damage:</b-col>
-                    <b-col><b-progress value=10 variant="danger"></b-progress></b-col>
+                    <b-col>Sensors blocked: 10%</b-col>
                 </b-row>
             </div>
         </b-modal>

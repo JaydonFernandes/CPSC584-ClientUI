@@ -6,7 +6,7 @@
         <div id="crosshair" style = 'left:0px ; top:0px'>
             <b-img id="imgCrosshair" src = "../assets/crosshair1.png" style = 'width: 200px; height: 200px'></b-img>
             </div>
-        <b-row class="mb-3">
+        <b-row class="row no-gutters">
             <b-col>
                 <b-img v-if= img1 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
@@ -17,11 +17,11 @@
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
-                <b-img v-if= img3 src="../assets/worldMap/image_part_003.jpg" fluid alt="Responsive image">
+                <b-img v-if= img3 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image">
                 </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
         </b-row>
-        <b-row class="mb-3">
+        <b-row class="row no-gutters">
             <b-col>
                 <b-img v-if= "this.currentTile == 4" src="../assets/worldMap/active_image_part_004.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else-if= img4 src="../assets/worldMap/image_part_004.jpg" fluid alt="Responsive image"></b-img>
@@ -38,9 +38,9 @@
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
         </b-row>
-        <b-row class="mb-3">
+        <b-row class="row no-gutters">
             <b-col>
-                <b-img v-if= img7 src="../assets/worldMap/image_part_007.jpg" fluid alt="Responsive image"></b-img>
+                <b-img v-if= img7 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image"></b-img>
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="1">
@@ -49,7 +49,7 @@
                 <b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
             <b-col order="2">
-                <b-img v-if= img9 src="../assets/worldMap/image_part_009.jpg" fluid alt="Responsive image">
+                <b-img v-if= img9 src="../assets/worldMap/image_part_001.jpg" fluid alt="Responsive image">
                 </b-img><b-img v-else src="../assets/fog.jpg" fluid alt="Responsive image"></b-img>
             </b-col>
         </b-row>
@@ -307,6 +307,15 @@ methods: {
         border-color: grey;
         width: 100vw!important;
         height: 88vh;
+    }
+    .row.no-gutters {
+        margin-right: 0;
+        margin-left: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .img {
+        border: 1px solid black;
     }
     /*
     .fill {
