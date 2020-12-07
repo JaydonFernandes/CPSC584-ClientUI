@@ -36,7 +36,7 @@ export default {
     return {
       mapVisible: false,
       statusVisible: false,
-      baseURL: 'http://192.168.1.70:8000/run/?',
+      baseURL: 'http://192.168.0.32:8000/run/?',
       image: "",
       temp: true,
       imageData: "",
@@ -58,7 +58,7 @@ export default {
 
     getScreenshot(){
       console.log("getting screenshot")
-      this.$http.get("http://192.168.1.70:8000/run/?action=qr", {
+      this.$http.get("http://192.168.0.32:8000/run/?action=qr", {
           responseType: 'arraybuffer' 
       })
       .then((data) => {
@@ -69,7 +69,7 @@ export default {
     },
 
     getQrCodeData(){
-      this.$http.get("http://192.168.1.70:8000/run/?action=lasttile", {
+      this.$http.get("http://192.168.0.32:8000/run/?action=lasttile", {
       })
       .then((response) => {
         this.tileNum = this.calculateTileNumber(response.data.x, response.data.y);
@@ -204,10 +204,10 @@ export default {
     //event haddler for key input
     window.addEventListener('keyup', this.keyupHandler);
     console.log("init screenshot")
-    this.getScreenshot();
+    // this.getScreenshot();
     setInterval(()=>{
       this.image = this.$store.state.screenshotImage;
-    }, 300)
+    }, 100)
     this.getQrCodeData();
   },
   destroyed() {

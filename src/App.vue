@@ -23,7 +23,7 @@ export default {
   methods: {
     getScreenshot(){
       console.log("App screenshot")
-      this.$http.get("http://192.168.1.70:8000/run/?action=qr", {
+      this.$http.get("http://192.168.0.32:8000/run/?action=qr", {
           responseType: 'arraybuffer' 
       })
       .then((data) => {
@@ -41,7 +41,7 @@ export default {
   },
   created() {
     console.log("App created");
-    this.screenshotInterval = setInterval( this.getScreenshot, 300)
+    this.screenshotInterval = setInterval( this.getScreenshot, 350)
   }
 }
 
